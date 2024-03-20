@@ -16,13 +16,26 @@ namespace ClassLibrary.test
         {
             // Arrange
             var checkout = new Checkout();
-            
+
 
             // Act
             var totalPrice = checkout.GetTotalPrice();
 
             // Assert
             Assert.That(totalPrice, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GetTotalPrice_WhenAItemIsScanned()
+        {
+            
+            var checkout = new Checkout();
+            checkout.Scan("A");
+
+            var totalPrice = checkout.GetTotalPrice();
+
+            
+            Assert.That(totalPrice, Is.EqualTo(50));
         }
     }
 }
