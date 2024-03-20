@@ -37,5 +37,21 @@ namespace ClassLibrary.test
             
             Assert.That(totalPrice, Is.EqualTo(50));
         }
+
+        [Test]
+        public void GetTotalPrice_WhenDifferentItemAreScanned()
+        {
+
+            var checkout = new Checkout();
+            checkout.Scan("A");
+            checkout.Scan("B");
+            checkout.Scan("C");
+            checkout.Scan("D");
+
+            var totalPrice = checkout.GetTotalPrice();
+
+
+            Assert.That(totalPrice, Is.EqualTo(115));
+        }
     }
 }

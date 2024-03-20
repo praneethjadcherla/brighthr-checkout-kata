@@ -38,7 +38,10 @@ namespace ClassLibrary.main
         private Dictionary<string, int> prices = new Dictionary<string, int>
     {
         { "A", 50 },
- 
+        { "B", 30 },
+        { "C", 20 },
+        { "D", 15 }
+
     };
     }
 }
