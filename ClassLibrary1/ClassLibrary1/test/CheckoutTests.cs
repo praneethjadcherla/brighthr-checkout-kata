@@ -110,5 +110,21 @@ namespace ClassLibrary.test
 
             Assert.That(totalPrice, Is.EqualTo(335));
         }
+
+        [Test]
+        public void Scan_ThrowsException_WhenItemIsNull()
+        {
+            var checkout = new Checkout();
+
+            Assert.Throws<ArgumentException>(() => checkout.Scan(null));
+        }
+
+        [Test]
+        public void Scan_ThrowsException_WhenItemIsEmpty()
+        {
+            var checkout = new Checkout();
+
+            Assert.Throws<ArgumentException>(() => checkout.Scan(""));
+        }
     }
 }

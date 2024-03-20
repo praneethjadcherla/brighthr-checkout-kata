@@ -41,7 +41,6 @@ namespace ClassLibrary.main
                     totalPrice += (quantity / offerQuantity) * offerPrice;
                     totalPrice += (quantity % offerQuantity) * prices[sku];
 
-
                 }
                 else
                 {
@@ -54,6 +53,11 @@ namespace ClassLibrary.main
 
         public void Scan(string item)
         {
+            if (string.IsNullOrEmpty(item))
+            {
+                throw new ArgumentException("Item cannot be null or empty.");
+            }
+
             if (itemsScanned.ContainsKey(item))
             {
                 itemsScanned[item]++;
