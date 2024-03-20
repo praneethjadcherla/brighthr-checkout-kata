@@ -126,5 +126,13 @@ namespace ClassLibrary.test
 
             Assert.Throws<ArgumentException>(() => checkout.Scan(""));
         }
+
+        [Test]
+        public void Scan_ThrowsException_WhenItemIsNotAvailable()
+        {
+            var checkout = new Checkout();
+
+            Assert.Throws<ArgumentException>(() => checkout.Scan("Z"));
+        }
     }
 }

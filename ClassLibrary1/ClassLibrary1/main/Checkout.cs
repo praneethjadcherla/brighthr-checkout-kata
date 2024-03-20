@@ -58,6 +58,11 @@ namespace ClassLibrary.main
                 throw new ArgumentException("Item cannot be null or empty.");
             }
 
+            if (!prices.ContainsKey(item))
+            {
+                throw new ArgumentException($"Item '{item}' is not available in the price list.");
+            }
+
             if (itemsScanned.ContainsKey(item))
             {
                 itemsScanned[item]++;
