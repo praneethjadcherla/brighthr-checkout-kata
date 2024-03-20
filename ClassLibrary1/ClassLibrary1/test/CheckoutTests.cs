@@ -17,7 +17,6 @@ namespace ClassLibrary.test
             // Arrange
             var checkout = new Checkout();
 
-
             // Act
             var totalPrice = checkout.GetTotalPrice();
 
@@ -27,13 +26,11 @@ namespace ClassLibrary.test
 
         [Test]
         public void GetTotalPrice_WhenAItemIsScanned()
-        {
-            
+        {   
             var checkout = new Checkout();
             checkout.Scan("A");
 
             var totalPrice = checkout.GetTotalPrice();
-
             
             Assert.That(totalPrice, Is.EqualTo(50));
         }
@@ -41,7 +38,6 @@ namespace ClassLibrary.test
         [Test]
         public void GetTotalPrice_WhenDifferentItemAreScanned()
         {
-
             var checkout = new Checkout();
             checkout.Scan("A");
             checkout.Scan("B");
@@ -50,8 +46,33 @@ namespace ClassLibrary.test
 
             var totalPrice = checkout.GetTotalPrice();
 
-
             Assert.That(totalPrice, Is.EqualTo(115));
+        }
+
+        [Test]
+        public void GetTotalPriceOfSpecialPriceItem_A()
+        {
+            var checkout = new Checkout();
+            checkout.Scan("A");
+            checkout.Scan("A");
+            checkout.Scan("A");
+  
+            var totalPrice = checkout.GetTotalPrice();
+
+            Assert.That(totalPrice, Is.EqualTo(130));
+        }
+
+        [Test]
+        public void GetTotalPriceOfSpecialPriceItem_B()
+        {
+            var checkout = new Checkout();
+            checkout.Scan("B");
+            checkout.Scan("B");
+
+            var totalPrice = checkout.GetTotalPrice();
+
+
+            Assert.That(totalPrice, Is.EqualTo(45));
         }
     }
 }

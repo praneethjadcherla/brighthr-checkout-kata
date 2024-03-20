@@ -9,18 +9,47 @@ namespace ClassLibrary.main
     public class Checkout : ICheckout
     {
         private Dictionary<string, int> itemsScanned = new Dictionary<string, int>();
+
+        private Dictionary<string, int> prices = new Dictionary<string, int>
+        {
+          { "A", 50 },
+          { "B", 30 },
+          { "C", 20 },
+          { "D", 15 }
+
+        };
+
+        private Dictionary<string, (int quantity, int price)> specialPrices = new Dictionary<string, (int, int)>
+        {
+          { "A", (3, 130) },
+          { "B", (2, 45) }
+        };
         public int GetTotalPrice()
         {
-            int totalprice = 0;
+            int totalPrice = 0;
             foreach (var item in itemsScanned)
             {
                 string sku = item.Key;
                 int quantity = item.Value;
 
-                totalprice += quantity * prices[sku]; 
+                if (specialPrices.ContainsKey(sku))
+                {
+                    var offer = specialPrices[sku];
+                    int offerQuantity = offer.Item1;
+                    int offerPrice = offer.Item2;
+
+                    totalPrice += (quantity / offerQuantity) * offerPrice;
+                    totalPrice += (quantity % offerQuantity) * prices[sku];
+
+
+                }
+                else
+                {
+                    totalPrice += quantity * prices[sku];
+                }
             }            
 
-            return totalprice;
+            return totalPrice;
         }
 
         public void Scan(string item)
@@ -35,13 +64,6 @@ namespace ClassLibrary.main
             }
         }
 
-        private Dictionary<string, int> prices = new Dictionary<string, int>
-    {
-        { "A", 50 },
-        { "B", 30 },
-        { "C", 20 },
-        { "D", 15 }
-
-    };
+        
     }
 }
