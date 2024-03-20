@@ -74,5 +74,41 @@ namespace ClassLibrary.test
 
             Assert.That(totalPrice, Is.EqualTo(45));
         }
+
+        [Test]
+        public void GetTotalPrice_WhenbothSpecialOfferItem_And_NoOfferItem_Scanned()
+        {
+            var checkout = new Checkout();
+            checkout.Scan("B");
+            checkout.Scan("A");
+            checkout.Scan("B");
+
+            var totalPrice = checkout.GetTotalPrice();
+
+
+            Assert.That(totalPrice, Is.EqualTo(95));
+        }
+
+        [Test]
+        public void GetTotalPrice_CombinationOfMultipleOffers()
+        {
+            var checkout = new Checkout();
+            checkout.Scan("B");
+            checkout.Scan("A");
+            checkout.Scan("B");
+            checkout.Scan("B");
+            checkout.Scan("B");
+            checkout.Scan("D");
+            checkout.Scan("A");
+            checkout.Scan("A");
+            checkout.Scan("A");
+            checkout.Scan("B");
+            checkout.Scan("C");
+
+            var totalPrice = checkout.GetTotalPrice();
+
+
+            Assert.That(totalPrice, Is.EqualTo(335));
+        }
     }
 }
